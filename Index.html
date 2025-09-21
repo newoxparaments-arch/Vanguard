@@ -1,0 +1,327 @@
+DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vanguard Corporation</title>
+  <style>
+    /* Reset básico */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(180deg, #0a0a0a, #1a1a1a);
+      color: #fff;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Header */
+    header {
+      background: #111;
+      padding: 25px 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    header h1 {
+      font-size: 34px;
+      color: #7a5cff;
+      text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
+    }
+
+    header p {
+      margin-top: 5px;
+      font-size: 15px;
+      color: #ccc;
+    }
+
+    /* Nav */
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin: 20px 0;
+      background: #1a1a1a;
+      padding: 10px 0;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    }
+
+    nav a {
+      font-weight: bold;
+      padding: 10px 20px;
+      border-radius: 6px;
+      position: relative;
+      overflow: hidden;
+      display: inline-block;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background: #7a5cff;
+      left: 0;
+      bottom: 0;
+      transition: 0.3s;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    nav a:hover {
+      transform: scale(1.1);
+    }
+
+    /* Hero com animação leve */
+    .hero {
+      text-align: center;
+      padding: 80px 20px;
+      background: radial-gradient(circle at center, #1e1e2f, #0a0a0a);
+      border-bottom: 3px solid #7a5cff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(122,92,255,0.2), transparent);
+      animation: rotate 20s linear infinite;
+      top: -50%;
+      left: -50%;
+      z-index: 0;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .hero h2 {
+      font-size: 36px;
+      margin-bottom: 15px;
+      color: #fff;
+      text-shadow: 1px 1px 6px #000;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero p {
+      color: #bbb;
+      font-size: 18px;
+      max-width: 700px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Sections */
+    section {
+      padding: 60px 20px;
+      max-width: 1200px;
+      margin: auto;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    section.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    section h3 {
+      font-size: 28px;
+      margin-bottom: 25px;
+      color: #7a5cff;
+      border-bottom: 2px solid #7a5cff;
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+
+    /* Notícias */
+    .news article {
+      background: #222;
+      padding: 25px;
+      border-radius: 12px;
+      margin-bottom: 25px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.5);
+      transition: transform 0.3s, background 0.3s;
+      cursor: pointer;
+    }
+
+    .news article:hover {
+      transform: scale(1.03);
+      background: #2a2a2a;
+    }
+
+    .news h4 {
+      font-size: 22px;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+
+    .news p {
+      color: #ccc;
+      font-size: 16px;
+    }
+
+    /* Comunidades */
+    .communities {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+
+    .card {
+      background: #222;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.5);
+      transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: scale(1.05) translateY(-5px);
+      background: #2a2a2a;
+      box-shadow: 0 8px 20px rgba(122,92,255,0.5);
+    }
+
+    .card h3 {
+      font-size: 22px;
+      margin-bottom: 15px;
+      color: #7a5cff;
+    }
+
+    .card p {
+      font-size: 16px;
+      color: #ccc;
+    }
+
+    /* Footer */
+    footer {
+      background: #111;
+      text-align: center;
+      padding: 30px 20px;
+      margin-top: 50px;
+      font-size: 15px;
+      color: #aaa;
+      border-top: 3px solid #7a5cff;
+      box-shadow: 0 -4px 10px rgba(0,0,0,0.5);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    @media (max-width: 768px) {
+      .hero h2 {
+        font-size: 28px;
+      }
+      .hero p {
+        font-size: 16px;
+      }
+      section h3 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Vanguard Corporation</h1>
+    <p>Contato: +55 48 9997-0452 | CEO: NEWOX e ZUBAT</p>
+  </header>
+
+  <nav>
+    <a href="#noticias" class="tab-link">Notícias</a>
+    <a href="#comunidades" class="tab-link">Comunidades</a>
+    <a href="#sobre" class="tab-link">Sobre</a>
+  </nav>
+
+  <section class="hero active">
+    <h2>Construindo o Futuro da Cibersegurança e Desenvolvimento de Software</h2>
+    <p>A Vanguard Corporation é uma comunidade interativa dedicada à inovação, segurança digital e novas tecnologias para um mundo descentralizado.</p>
+  </section>
+
+  <section id="noticias" class="news">
+    <h3>📰 Notícias</h3>
+    <article>
+      <h4>Briga da Country e Cataclysm</h4>
+      <p>Conflitos recentes entre Country e Cataclysm levantaram debates intensos na comunidade. A Vanguard acompanha de perto e oferece análises técnicas sobre os impactos digitais.</p>
+    </article>
+    <article>
+      <h4>Nova Era da Web</h4>
+      <p>Estamos desenvolvendo comunidades seguras e escaláveis para engajamento global em desenvolvimento de software e cibersegurança.</p>
+    </article>
+  </section>
+
+  <section id="comunidades" class="communities">
+    <div class="card">
+      <h3>👨‍💻 Desenvolvimento de Software</h3>
+      <p>Participe de grupos de estudo, compartilhe código e contribua em projetos open source.</p>
+    </div>
+    <div class="card">
+      <h3>🔐 Cyber Segurança</h3>
+      <p>Discussões sobre vulnerabilidades, defesas digitais e práticas seguras para o futuro da internet.</p>
+    </div>
+    <div class="card">
+      <h3>🌍 Comunidade Global</h3>
+      <p>Troque experiências com membros ao redor do mundo e fortaleça sua rede profissional.</p>
+    </div>
+  </section>
+
+  <section id="sobre">
+    <h3>Sobre a Vanguard Corporation</h3>
+    <p>Fundada com o objetivo de unir especialistas e entusiastas em torno de tecnologia, a Vanguard é liderada por <b>NEWOX e ZUBAT</b>, focando em inovação, ética e segurança digital.</p>
+  </section>
+
+  <footer>
+    <p>© 2025 Vanguard Corporation. Todos os direitos reservados.</p>
+  </footer>
+
+  <script>
+    // Fade in ao scroll
+    const sections = document.querySelectorAll('section');
+    window.addEventListener('scroll', () => {
+      sections.forEach(sec => {
+        const top = sec.getBoundingClientRect().top;
+        if(top < window.innerHeight - 100){
+          sec.classList.add('active');
+        }
+      });
+    });
+
+    // Tab smooth scroll
+    const links = document.querySelectorAll('.tab-link');
+    links.forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(link.getAttribute('href'));
+        target.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
+</body>
+  </html>
